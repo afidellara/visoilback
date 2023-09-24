@@ -1,5 +1,8 @@
 const express = require('express');
+const productoController = require('../controllers/ProductoController');
+const Router = express.Router();
 
-const router = express.Router();
+//Rutas de producto
+Router.post('/registrarproducto',productoController.registrarProducto);
 
-module.exports = router;
+module.exports = Router;
