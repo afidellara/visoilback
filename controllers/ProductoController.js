@@ -47,3 +47,46 @@ exports.consultarProductos = async (req, res) => {
     res.status(500).json({ error: 'Error al consultar los productos' });
   }
 };
+
+// Controlador para actualizar un producto
+exports.actualizarProducto = async (req, res) => {
+  const codigoProducto = req.params.codigo; // El código del producto a actualizar
+
+  try {
+    const productoActualizado = await Producto.findOneAndUpdate(
+      { codigo: codigoProducto },
+      {
+        $set: req.body, // Utiliza el cuerpo de la solicitud para actualizar los campos
+      },
+      { new: true }
+    );
+
+    if (!productoActualizado) {
+      return res.status(404).json({ error: 'Producto no encontrado' });
+    }
+
+    res.status(200).json(productoActualizado);
+  } catch (error) {
+    console.error('Error al actualizar el producto:', error);
+    res.status(500).json({ error: 'Error al actualizar el producto' });
+  }
+};
+
+
+// Controlador para eliminar un producto
+exports.eliminarProducto = async (req, res) => {
+  const codigoProducto = req.params.codigo; // El código del producto a eliminar
+
+  try {
+    const productoEliminado = await Producto.findOneAndDelete({ codigo: codigoProducto });
+
+    if (!productoEliminado) {
+      return res.status(404).json({ error: 'Producto no encontrado' });
+    }
+
+    res.status(200).json({ mensaje: 'Producto eliminado correctamente', producto: productoEliminado });
+  } catch (error) {
+    console.error('Error al eliminar el producto:', error);
+    res.status(500).json({ error: 'Error al eliminar el producto' });
+  }
+};

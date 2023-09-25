@@ -6,6 +6,8 @@ const Router = express.Router();
 //Rutas de producto
 Router.post('/registrarproducto',productoController.registrarProducto);
 Router.get('/productos',productoController.consultarProductos);
+Router.put('/productos/:codigo', productoController.actualizarProducto);
+Router.delete('/productos/:codigo', productoController.eliminarProducto);
 
 //Rutas Cliente
 Router.post('/registrarcliente',clienteController.registrarCliente);
