@@ -5,6 +5,7 @@ const Router = express.Router();
 
 //Rutas de producto
 Router.post('/registrarproducto',productoController.registrarProducto);
+Router.get('/productos',productoController.consultarProductos);
 
 //Rutas Cliente
 Router.post('/registrarcliente',clienteController.registrarCliente);

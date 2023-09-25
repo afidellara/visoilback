@@ -32,3 +32,18 @@ exports.registrarProducto = async (req, res) => {
     res.status(500).json({ error: 'Error al registrar el producto' });
   }
 };
+
+// Controlador para consultar todos los productos
+exports.consultarProductos = async (req, res) => {
+  try {
+    // Utiliza el modelo Producto para buscar todos los productos en la base de datos
+    const productos = await Producto.find();
+
+    // Responde con la lista de productos en formato JSON
+    res.status(200).json(productos);
+  } catch (error) {
+    console.error('Error al consultar los productos:', error);
+    // Responde con un mensaje de error
+    res.status(500).json({ error: 'Error al consultar los productos' });
+  }
+};
