@@ -38,7 +38,10 @@ const clienteSchema = new mongoose.Schema({
     },
     telefono: String,
     direccion: String,
-    estadoCliente: bool,
+    estadoCliente: {
+        type: Boolean,
+        default: true, 
+    },
     fotoPerfil: String,
     ciudad: String,
     barrio: String,
