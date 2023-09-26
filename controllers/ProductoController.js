@@ -34,7 +34,7 @@ exports.registrarProducto = async (req, res) => {
 };
 
 // Controlador para consultar todos los productos
-exports.consultarProductos = async (req, res) => {
+exports.consultarProductosAdmin = async (req, res) => {
   try {
     // Utiliza el modelo Producto para buscar todos los productos en la base de datos
     const productos = await Producto.find();
