@@ -10,9 +10,10 @@ Router.get('/productos',productoController.consultarProductosAdmin);
 Router.put('/productos/:codigo', productoController.actualizarProducto);
 Router.delete('/productos/:codigo', productoController.eliminarProducto);
 
+
 //Rutas Cliente
 Router.post('/registrarcliente',clienteController.registrarCliente);
-Router.get('/productos',productoController.consultarProductosCli);
+Router.get('/productos',clienteController.consultarProductosCli);
 
 
 module.exports = Router;
