@@ -12,8 +12,8 @@ Router.delete('/productos/:codigo', productoController.eliminarProducto);
 
 
 //Rutas Cliente
-Router.post('/registrarcliente',clienteController.registrarCliente);
-Router.get('/productos',clienteController.consultarProductosCli);
+Router.post('/registrarcliente', clienteController.registrarCliente);
+Router.get('/clientes', clienteController.consultarClientes);
 
 
 module.exports = Router;

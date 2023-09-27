@@ -52,17 +52,31 @@ exports.registrarCliente = async (req, res) => {
     }
 };
 
-// Controlador para consultar todos los productos
-exports.consultarProductosCli = async (req, res) => {
+// Controlador para consultar un cliente por su ID
+exports.consultarClientes = async (req, res) => {
     try {
-      // Utiliza el modelo Producto para buscar todos los productos en la base de datos
-      const productos = await Producto.find();
-  
-      // Responde con la lista de productos en formato JSON
-      res.status(200).json(productos);
+        const cliente = await Cliente.findById(req.params.id);         // buscar todos los productos en la base de datos
+        if (!cliente) {
+            return res.status(404).json({ error: 'Cliente no encontrado' });
+        }
+        res.status(200).json(cliente);          // Responde con la lista de productos en formato JSON
     } catch (error) {
-      console.error('Error al consultar los productos:', error);
-      // Responde con un mensaje de error
-      res.status(500).json({ error: 'Error al consultar los productos' });
-    }
-  };
+        res.status(500).json({ error: 'Error al obtener el cliente' });         //mensaje error
+    }
+};
+
+// Controlador para obtener un cliente por su ID
+exports.consultarClientePorID = async (req, res) => {
+    try {
+        const cliente = await Cliente.findById(req.params.id);
+        if (!cliente) {
+            return res.status(404).json({ error: 'Cliente no encontrado' });
+        }
+        res.status(200).json(cliente);
+    } catch (error) {
+        res.status(500).json({ error: 'Error al obtener el cliente' });
+    }
+};
+
+
+
