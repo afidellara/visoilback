@@ -52,16 +52,13 @@ exports.registrarCliente = async (req, res) => {
     }
 };
 
-// Controlador para consultar un cliente por su ID
+// Controlador para consultar TODOS los clientes 
 exports.consultarClientes = async (req, res) => {
     try {
-        const cliente = await Cliente.findById(req.params.id);         // buscar todos los productos en la base de datos
-        if (!cliente) {
-            return res.status(404).json({ error: 'Cliente no encontrado' });
-        }
-        res.status(200).json(cliente);          // Responde con la lista de productos en formato JSON
+        const clientes = await Cliente.find();
+        res.status(200).json(clientes);
     } catch (error) {
-        res.status(500).json({ error: 'Error al obtener el cliente' });         //mensaje error
+        res.status(500).json({ error: 'Error al obtener los clientes' });
     }
 };
 
@@ -75,6 +72,30 @@ exports.consultarClientePorID = async (req, res) => {
         res.status(200).json(cliente);
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener el cliente' });
+    }
+};
+
+// Controlador para actualizar un cliente por su CEDULA
+exports.actualizarCliente = async (req, res) => {
+    const cedulaCliente = req.params.cedula; // La cedula del cliente a actualizar
+
+    try {
+        const clienteActualizado = await Cliente.findOneAndUpdate(
+            { cedula: cedulaCliente },
+            {
+                $set: req.body, // Utiliza el cuerpo de la solicitud para actualizar los campos
+            },
+            { new: true }
+        );
+
+        if (!clienteActualizado) {
+            return res.status(404).json({ error: 'Cliente no encontrado' });
+        }
+
+        res.status(200).json(clienteActualizado);
+    } catch (error) {
+        console.error('Error al actualizar el cliente:', error);
+        res.status(500).json({ error: 'Error al actualizar el cliente' });
     }
 };
 
