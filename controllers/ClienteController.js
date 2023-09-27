@@ -99,5 +99,23 @@ exports.actualizarCliente = async (req, res) => {
     }
 };
 
+// Controlador para eliminar un cliente
+exports.eliminarCliente = async (req, res) => {
+    const cedulaCliente = req.params.cedula; // La cedula del cliente a eliminar
+  
+    try {
+      const clienteEliminado = await Cliente.findOneAndDelete({ cedula: cedulaCliente });
+  
+      if (!clienteEliminado) {
+        return res.status(404).json({ error: 'Cliente no encontrado' });
+      }
+  
+      res.status(200).json({ mensaje: 'Cliente eliminado correctamente', cliente: clienteEliminado });
+    } catch (error) {
+      console.error('Error al eliminar el cliente:', error);
+      res.status(500).json({ error: 'Error al eliminar el cliente' });
+    }
+  };
+
 
 

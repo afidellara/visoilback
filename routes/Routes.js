@@ -16,5 +16,6 @@ Router.get('/productosfiltradoporprecio', productoController.filtrarPorPrecio);
 Router.post('/registrarcliente', clienteController.registrarCliente);
 Router.get('/clientes', clienteController.consultarClientes);
 Router.put('/clientes/:cedula', clienteController.actualizarCliente);
+Router.delete('/clientes/:cedula',clienteController.eliminarCliente);
 
 module.exports = Router;
