@@ -9,6 +9,7 @@ Router.post('/registrarproducto',productoController.registrarProducto);
 Router.get('/productos',productoController.consultarProductosAdmin);
 Router.put('/productos/:codigo', productoController.actualizarProducto);
 Router.delete('/productos/:codigo', productoController.eliminarProducto);
+Router.get('/productosfiltradoporprecio', productoController.filtrarPorPrecio);
 
 
 //Rutas Cliente

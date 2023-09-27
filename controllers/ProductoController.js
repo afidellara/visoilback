@@ -90,3 +90,26 @@ exports.eliminarProducto = async (req, res) => {
     res.status(500).json({ error: 'Error al eliminar el producto' });
   }
 };
+
+
+exports.filtrarPorPrecio = async (req, res) => {
+  try {
+    const minPrecio = req.query.minPrecio;
+    const maxPrecio = req.query.maxPrecio;
+
+    if (!minPrecio || !maxPrecio) {
+      return res.status(400).json({ message: 'Debes proporcionar tanto minPrecio como maxPrecio en la URL' });
+    }
+
+    const productos = await Producto.find({
+      precio: {
+        $gte: parseFloat(minPrecio),
+        $lte: parseFloat(maxPrecio),
+      },
+    });
+
+    return res.json(productos);
+  } catch (error) {
+    return res.status(500).json({ message: 'Error interno del servidor' });
+  }
+};
