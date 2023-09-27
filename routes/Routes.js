@@ -1,6 +1,7 @@
 const express = require('express');
 const productoController = require('../controllers/ProductoController');
 const clienteController = require('../controllers/ClienteController');
+const serviceController = require('../controllers/ServiceController');
 
 const Router = express.Router();
 
@@ -16,5 +17,8 @@ Router.get('/productosfiltradoporprecio', productoController.filtrarPorPrecio);
 Router.post('/registrarcliente', clienteController.registrarCliente);
 Router.get('/clientes', clienteController.consultarClientes);
 
+
+//Ruta Servicio
+Router.post('/registrarServicio',serviceController.registrarServicio);
 
 module.exports = Router;
