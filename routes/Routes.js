@@ -13,8 +13,8 @@ Router.get('/productosfiltradoporprecio', productoController.filtrarPorPrecio);
 
 
 //Rutas Cliente
-Router.post('/registrarcliente',clienteController.registrarCliente);
-Router.get('/productos',clienteController.consultarProductosCli);
+Router.post('/registrarcliente', clienteController.registrarCliente);
+Router.get('/clientes', clienteController.consultarClientes);
 
 
 module.exports = Router;
