@@ -1,6 +1,6 @@
 const Producto = require('../models/Producto'); // Asegúrate de que la ruta sea correcta
 
-// Controlador para registrar un nuevo producto
+// Controlador para registrar un nuevo productoddd
 exports.registrarProducto = async (req, res) => {
   try {
     // Obtén los datos del producto desde el cuerpo de la solicitud (req.body)
