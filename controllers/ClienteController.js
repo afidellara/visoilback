@@ -19,10 +19,10 @@ exports.registrarCliente = async (req, res) => {
             fotoPerfil,
             ciudad,
             barrio,
-            contraseña
+            pass
         } = req.body;
 
-        const hashContraseña = await bcrypt.hash(contraseña, 10);
+        const hashContraseña = await bcrypt.hash(pass, 10);
 
         // Crea una instancia del modelo Cliente con los datos recibidos
         const nuevoCliente = new Cliente({
@@ -39,7 +39,7 @@ exports.registrarCliente = async (req, res) => {
             fotoPerfil,
             ciudad,
             barrio,
-            contraseña: hashContraseña
+            pass: hashContraseña
         });
 
         // Guarda el nuevo cliente en la base de datos

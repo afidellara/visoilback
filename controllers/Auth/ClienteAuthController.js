@@ -3,15 +3,15 @@ const bcrypt = require('bcrypt');
 
 // Asegúrate de importar correctamente tu modelo de Usuario
 exports.iniciarSesion = async function (req, res) {
-  const { correo, contraseña } = req.body;
+  const { correo, pass } = req.body;
 
   try {
     // Buscar el empleado por el correo proporcionado
     const cliente = await Cliente.findOne({ correo });
 
-    // Verificar si el empleado existe y si la contraseña es válida
+    // Verificar si el empleado existe y si la pass es válida
     if (cliente) {
-      const passwordMatch = await bcrypt.compare(contraseña, cliente.contraseña);
+      const passwordMatch = await bcrypt.compare(pass, cliente.pass);
       if (passwordMatch) {
         // Aquí podrías realizar acciones adicionales, como generar un token de autenticación, etc.
         // Devolver una respuesta con un código de éxito y los datos del empleado

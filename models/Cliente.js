@@ -45,7 +45,7 @@ const clienteSchema = new mongoose.Schema({
     fotoPerfil: String,
     ciudad: String,
     barrio: String,
-    contraseña: {
+    pass: {
         type: String,
         required: true,
     }
