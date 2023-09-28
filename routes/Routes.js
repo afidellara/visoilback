@@ -2,6 +2,7 @@ const express = require('express');
 const productoController = require('../controllers/ProductoController');
 const clienteController = require('../controllers/ClienteController');
 const serviceController = require('../controllers/ServiceController');
+const clienteAuthController = require('../controllers/Auth/ClienteAuthController');
 
 const Router = express.Router();
 
@@ -21,5 +22,8 @@ Router.delete('/clientes/:cedula',clienteController.eliminarCliente);
 
 //Ruta Servicio
 Router.post('/registrarServicio',serviceController.registrarServicio);
+
+//Ruta Inicio Sesion
+Router.post('/inicioSesionCliente', clienteAuthController.iniciarSesion);
 
 module.exports = Router;
