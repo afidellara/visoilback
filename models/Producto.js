@@ -31,7 +31,7 @@ const productoSchema = new mongoose.Schema({
   tela: String,
   talla: String,
   medida: String,
-  diseño: String
+  disenio: String
 });
 
 // Crea el modelo de Producto

@@ -4,7 +4,7 @@ const Producto = require('../models/Producto'); // Asegúrate de que la ruta sea
 exports.registrarProducto = async (req, res) => {
   try {
     // Obtén los datos del producto desde el cuerpo de la solicitud (req.body)
-    const { codigo, nombre, descripcion, precio, categoria, referencia, imagen, tela, talla, medida, diseño } = req.body;
+    const { codigo, nombre, descripcion, precio, categoria, referencia, imagen, tela, talla, medida, disenio } = req.body;
 
     // Crea una instancia del modelo Producto con los datos recibidos
     const nuevoProducto = new Producto({
@@ -18,7 +18,7 @@ exports.registrarProducto = async (req, res) => {
       tela,
       talla,
       medida,
-      diseño
+      disenio
     });
 
     // Guarda el nuevo producto en la base de datos
