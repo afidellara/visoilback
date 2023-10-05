@@ -22,6 +22,10 @@ Router.delete('/clientes/:cedula',clienteController.eliminarCliente);
 
 //Ruta Servicio
 Router.post('/registrarServicio',serviceController.registrarServicio);
+Router.get('/servicios',serviceController.consultarServiciosAdmin);
+Router.put('/servicios/:codigo', serviceController.actualizarServicio);
+Router.delete('/servicios/:codigo', serviceController.eliminarServicio);
+Router.post('/registrarServicioPersonalizado', serviceController.registrarServicioPersonalizado);
 
 //Ruta Inicio Sesion
 Router.post('/inicioSesionCliente', clienteAuthController.iniciarSesion);
