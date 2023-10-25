@@ -1,8 +1,8 @@
 const express = require('express');
 const productoController = require('../controllers/ProductoController');
 const clienteController = require('../controllers/ClienteController');
-const serviceController = require('../controllers/ServiceController');
 const clienteAuthController = require('../controllers/Auth/ClienteAuthController');
+const servicioCorteVinilloController = require('../controllers/servicioController/CorteVinilloController');
 
 const Router = express.Router();
 
@@ -20,12 +20,10 @@ Router.get('/clientes', clienteController.consultarClientes);
 Router.put('/clientes/:cedula', clienteController.actualizarCliente);
 Router.delete('/clientes/:cedula',clienteController.eliminarCliente);
 
-//Ruta Servicio
-Router.post('/registrarServicio',serviceController.registrarServicio);
-Router.get('/servicios',serviceController.consultarServiciosAdmin);
-Router.put('/servicios/:codigo', serviceController.actualizarServicio);
-Router.delete('/servicios/:codigo', serviceController.eliminarServicio);
-Router.post('/registrarServicioPersonalizado', serviceController.registrarServicioPersonalizado);
+//Rutas Servicio
+//Rutas ServicioCorteVinillo
+Router.post('/servicio/cortevinillo',servicioCorteVinilloController.registrarServicioCorteVinillo);
+
 
 //Ruta Inicio Sesion
 Router.post('/inicioSesionCliente', clienteAuthController.iniciarSesion);
