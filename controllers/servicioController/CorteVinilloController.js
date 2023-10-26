@@ -14,7 +14,8 @@ exports.registrarServicioCorteVinillo = async (req, res) => {
       descripcion,
       texto,
       tamanio,
-      tipo
+      tipo,
+      cedula,
     } = req.body;
 
     // Crear un nuevo servicio de corte de vinilo
@@ -25,7 +26,8 @@ exports.registrarServicioCorteVinillo = async (req, res) => {
       descripcion,
       texto,
       tamanio,
-      tipo
+      tipo,
+      cedula
     });
 
     // Guardar el servicio en la base de datos
@@ -38,3 +40,14 @@ exports.registrarServicioCorteVinillo = async (req, res) => {
   }
 };
 
+exports.consultarServiciosCorteVinillo = async (req, res) => {
+  try {
+    // Realizar una consulta a la base de datos para obtener todos los servicios de corte de vinilo
+    const servicios = await ServicioCorteVinillo.find();
+
+    res.json(servicios);
+  } catch (error) {
+    console.error('Error al consultar los servicios de corte de vinilo:', error);
+    res.status(500).send('Error interno del servidor');
+  }
+};

@@ -2,13 +2,14 @@ const mongoose = require('mongoose');
 
 // Define el esquema para la entidad servicioCorteSchema
 const servicioCorteSchema = new mongoose.Schema({
-  id: { type: String, default: mongoose.Types.ObjectId },
   piezaCorte: String,
   tela: String,
   cantidad: Number,
   descripcion: String,
   imagen: String,
-  tipo: String
+  tipo: String,
+  cedula: String,
+  nombre: String
 });
 
 // Crea un modelo a partir del esquema

@@ -3,6 +3,7 @@ const productoController = require('../controllers/ProductoController');
 const clienteController = require('../controllers/ClienteController');
 const clienteAuthController = require('../controllers/Auth/ClienteAuthController');
 const servicioCorteVinilloController = require('../controllers/servicioController/CorteVinilloController');
+const servicioConfeccionController = require('../controllers/servicioController/ConfeccioController');
 
 const Router = express.Router();
 
@@ -23,6 +24,9 @@ Router.delete('/clientes/:cedula',clienteController.eliminarCliente);
 //Rutas Servicio
 //Rutas ServicioCorteVinillo
 Router.post('/servicio/cortevinillo',servicioCorteVinilloController.registrarServicioCorteVinillo);
+Router.get('/servicio/cortevinillo',servicioCorteVinilloController.consultarServiciosCorteVinillo);
+//Rutas confeccion
+Router.post('/servicio/confeccion',servicioConfeccionController.registrarServicioConfeccion);
 
 
 //Ruta Inicio Sesion
