@@ -1,37 +1,58 @@
-const Producto = require('../models/Producto'); // Asegúrate de que la ruta sea correcta
+const Producto = require('../models/Producto'); 
+const multer = require('multer');
 
-// Controlador para registrar un nuevo productoddd
-exports.registrarProducto = async (req, res) => {
-  try {
-    // Obtén los datos del producto desde el cuerpo de la solicitud (req.body)
-    const { codigo, nombre, descripcion, precio, categoria, referencia, imagen, tela, talla, medida, disenio } = req.body;
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '/public'); // Directorio donde se guardarán las imágenes
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname); // Usa el nombre original del archivo
+  }
+});
 
-    // Crea una instancia del modelo Producto con los datos recibidos
-    const nuevoProducto = new Producto({
-      codigo,
-      nombre,
-      descripcion,
-      precio,
-      categoria,
-      referencia,
-      imagen,
-      tela,
-      talla,
-      medida,
-      disenio
-    });
+const upload = multer({ storage: storage });
 
-    // Guarda el nuevo producto en la base de datos
-    await nuevoProducto.save();
-    console.log("Producto guardado");
-    // Responde con un mensaje de éxito
-    res.status(201).json({ mensaje: 'Producto registrado con éxito' });
-  } catch (error) {
-    console.error('Error al registrar el producto:', error);
-    // Responde con un mensaje de error
-    res.status(500).json({ error: 'Error al registrar el producto' });
-  }
+exports.registrarProducto = (req, res) => {
+  upload.single('imagen')(req, res, async function (err) {
+    try {
+      if (err) {
+        // Maneja el error de carga de imagen aquí
+        return res.status(400).json({ mensaje: 'Error al cargar la imagen' });
+      }
+
+      const { codigo, nombre, descripcion, precio, categoria, referencia, tela, talla, medida, disenio } = req.body;
+      const imagen = req.file ? req.file.filename : null; // Nombre del archivo de imagen subido, o null si no se proporciona
+
+      
+      // Crea un nuevo producto en la base de datos
+      const producto = new Producto({
+        codigo,
+        nombre,
+        descripcion,
+        precio,
+        categoria,
+        referencia,
+        imagen,
+        tela,
+        talla,
+        medida,
+        disenio
+      });
+
+      console.log(producto); 
+
+      await producto.save();
+
+      res.json({ mensaje: 'Producto creado exitosamente' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ mensaje: 'Error al crear el producto' });
+    }
+  });
 };
+
+
+
 
 // Controlador para consultar todos los productos
 exports.consultarProductosAdmin = async (req, res) => {
@@ -113,3 +134,69 @@ exports.filtrarPorPrecio = async (req, res) => {
     return res.status(500).json({ message: 'Error interno del servidor' });
   }
 };
+
+exports.filtrarPorCodigo = async (req, res) => {
+  try {
+    const codigo = req.query.codigo;
+
+    if (!codigo) {
+      return res.status(400).json({ message: 'Debes proporcionar un código en la URL' });
+    }
+
+    const producto = await Producto.findOne({ codigo });
+
+    return res.json(producto);
+  } catch (error) {
+    return res.status(500).json({ message: 'Error interno del servidor' });
+  }
+};
+
+
+exports.filtrarPorNombre = async (req, res) => {
+  try {
+    const nombre = req.query.nombre;
+
+    if (!nombre) {
+      return res.status(400).json({ message: 'Debes proporcionar un nombre en la URL' });
+    }
+
+    const productos = await Producto.find({ nombre });
+
+    return res.json(productos);
+  } catch (error) {
+    return res.status(500).json({ message: 'Error interno del servidor' });
+  }
+};
+
+exports.filtrarPorCategoria = async (req, res) => {
+  try {
+    const categoria = req.query.categoria;
+
+    if (!categoria) {
+      return res.status(400).json({ message: 'Debes proporcionar una categoría en la URL' });
+    }
+
+    const productos = await Producto.find({ categoria });
+
+    return res.json(productos);
+  } catch (error) {
+    return res.status(500).json({ message: 'Error interno del servidor' });
+  }
+};
+
+exports.filtrarPorReferencia = async (req, res) => {
+  try {
+    const referencia = req.query.referencia;
+
+    if (!referencia) {
+      return res.status(400).json({ message: 'Debes proporcionar una referencia en la URL' });
+    }
+
+    const productos = await Producto.find({ referencia });
+
+    return res.json(productos);
+  } catch (error) {
+    return res.status(500).json({ message: 'Error interno del servidor' });
+  }
+};
+
