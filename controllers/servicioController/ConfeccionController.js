@@ -1,5 +1,4 @@
-const express = require('express');
-const router = express.Router();
+
 const ServicioConfeccion = require('../../models/Servicio/Confeccion');
 
 // Otros imports y configuraciones necesarios
@@ -41,7 +40,10 @@ exports.registrarServicioConfeccion = async (req, res) => {
 };
 
 
-const ServicioConfeccion = require('../models/servicioCorteModel');
+
+
+
+
 
 // Otros imports y configuraciones necesarios
 
@@ -49,9 +51,9 @@ const ServicioConfeccion = require('../models/servicioCorteModel');
 exports.consultarServiciosConfeccion = async (req, res) => {
   try {
     // Consultar todos los servicios de corte en la base de datos
-    const serviciosConfeccion = await ServicioConfeccion.find();
+    const consultarServiciosConfeccion = await ServicioConfeccion.find();
 
-    res.json(serviciosCorte);
+    res.json(consultarServiciosConfeccion);
   } catch (error) {
     console.error('Error al consultar los servicios de corte:', error);
     res.status(500).send('Error interno del servidor');
