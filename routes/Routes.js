@@ -34,6 +34,9 @@ Router.get('/servicio/cortevinillo',servicioCorteVinilloController.consultarServ
 //Rutas confeccion
 Router.post('/servicio/confeccion',servicioConfeccionController.registrarServicioConfeccion);
 Router.get('/servicio/confeccion',servicioConfeccionController.consultarServiciosConfeccion);
+Router.put('/servicio/confeccion/:id',servicioConfeccionController.actualizarServicioConfeccion);
+Router.delete('/servicio/confeccion/:id',servicioConfeccionController.eliminarServicioConfeccion);
+
 //Rutas corte
 Router.post('/servicio/corte',servicioCorteController.registrarServicioCorte);
 Router.get('/servicio/corte',servicioCorteController.consultarServicioCorte);
