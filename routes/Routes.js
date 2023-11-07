@@ -1,6 +1,7 @@
 const express = require('express');
 const productoController = require('../controllers/ProductoController');
 const clienteController = require('../controllers/ClienteController');
+const administradorController = require('../controllers/AdministradorController');
 const clienteAuthController = require('../controllers/Auth/ClienteAuthController');
 const administradorAuthController = require('../controllers/Auth/AdministradorAuthController');
 const servicioCorteVinilloController = require('../controllers/servicioController/CorteVinilloController');
@@ -20,6 +21,9 @@ Router.get('/productos',productoController.consultarProductosAdmin);
 Router.put('/productos/:codigo', productoController.actualizarProducto);
 Router.delete('/productos/:codigo', productoController.eliminarProducto);
 Router.get('/productosfiltradoporprecio', productoController.filtrarPorPrecio);
+
+//RutasAdm
+Router.post('/registraradm', administradorController.registrarAdministrador);
 
 
 //Rutas Cliente

@@ -1,6 +1,35 @@
 const bcrypt = require('bcrypt');
 const Administrador = require('../models/Administrador'); // Importa el modelo de Adm
 
+exports.registrarAdministrador = async (req, res) => {
+  try {
+      // Extrae los datos del adm del cuerpo de la solicitud
+      const {
+        codigo,
+        correo,
+        password,
+        estado
+      } = req.body;
+
+      const hashContraseña = await bcrypt.hash(password, 10);
+
+      // Crea una instancia del modelo adm con los datos recibidos
+      const nuevoAdministrador = new Administrador({
+          codigo,
+          correo,
+          estado,
+          password: hashContraseña
+      });
+
+      // Guarda el nuevo adm en la base de datos
+      await nuevoAdministrador.save();
+
+      res.status(201).json({ mensaje: 'Administrador registrado con éxito' });
+  } catch (error) {
+      console.error('Error al registrar el adm:', error);
+      res.status(500).json({ error: 'Error al registrar el adm' });
+  }
+};
 
 // Controlador para actualizar un cliente por su CEDULA
 exports.actualizarAdministrador = async (req, res) => {

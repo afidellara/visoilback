@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 // Asegúrate de importar correctamente tu modelo de Usuario
 exports.iniciarSesion = async function (req, res) {
-  const { correo, pass } = req.body;
+  const { correo, password } = req.body;
 
   try {
     // Buscar el adm por el correo proporcionado
@@ -15,7 +15,7 @@ exports.iniciarSesion = async function (req, res) {
     }
 
     // Si el adm existe, verificar la contraseña
-    const passwordMatch = await bcrypt.compare(pass, administrador.pass);
+    const passwordMatch = await bcrypt.compare(password, administrador.password);
     if (passwordMatch) {
       // Aquí podrías realizar acciones adicionales, como generar un token de autenticación, etc.
       // Devolver una respuesta con un código de éxito y los datos del adm
