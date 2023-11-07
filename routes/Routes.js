@@ -2,6 +2,7 @@ const express = require('express');
 const productoController = require('../controllers/ProductoController');
 const clienteController = require('../controllers/ClienteController');
 const clienteAuthController = require('../controllers/Auth/ClienteAuthController');
+const administradorAuthController = require('../controllers/Auth/AdministradorAuthController');
 const servicioCorteVinilloController = require('../controllers/servicioController/CorteVinilloController');
 const servicioConfeccionController = require('../controllers/servicioController/ConfeccioController');
 
@@ -31,5 +32,6 @@ Router.post('/servicio/confeccion',servicioConfeccionController.registrarServici
 
 //Ruta Inicio Sesion
 Router.post('/inicioSesionCliente', clienteAuthController.iniciarSesion);
+Router.post('/inicioSesionAdm', administradorAuthController.iniciarSesion);
 
 module.exports = Router;
