@@ -1,9 +1,7 @@
 const express = require('express');
 const productoController = require('../controllers/ProductoController');
 const clienteController = require('../controllers/ClienteController');
-const administradorController = require('../controllers/AdministradorController');
 const clienteAuthController = require('../controllers/Auth/ClienteAuthController');
-const administradorAuthController = require('../controllers/Auth/AdministradorAuthController');
 const servicioCorteVinilloController = require('../controllers/servicioController/CorteVinilloController');
 const servicioConfeccionController = require('../controllers/servicioController/ConfeccionController');
 const servicioCorteController = require('../controllers/servicioController/CorteController');
@@ -21,9 +19,6 @@ Router.get('/productos',productoController.consultarProductosAdmin);
 Router.put('/productos/:codigo', productoController.actualizarProducto);
 Router.delete('/productos/:codigo', productoController.eliminarProducto);
 Router.get('/productosfiltradoporprecio', productoController.filtrarPorPrecio);
-
-//RutasAdm
-Router.post('/registraradm', administradorController.registrarAdministrador);
 
 
 //Rutas Cliente
@@ -43,13 +38,11 @@ Router.post('/servicio/confeccion',servicioConfeccionController.registrarServici
 Router.get('/servicio/confeccion',servicioConfeccionController.consultarServiciosConfeccion);
 Router.put('/servicio/confeccion/:id',servicioConfeccionController.actualizarServicioConfeccion);
 Router.delete('/servicio/confeccion/:id',servicioConfeccionController.eliminarServicioConfeccion);
-
 //Rutas corte
 Router.post('/servicio/corte',servicioCorteController.registrarServicioCorte);
 Router.get('/servicio/corte',servicioCorteController.consultarServicioCorte);
 Router.put('/servicio/corte/:id',servicioCorteController.actualizarServicioCorte);
 Router.delete('/servicio/corte/:id',servicioCorteController.eliminarServicioCorte);
-
 //Rutas estampado
 Router.post('/servicio/estampado',servicioEstampadoController.registrarServicioEstampado);
 Router.get('/servicio/estampado',servicioEstampadoController.consultarServicioEstampado);
@@ -69,6 +62,5 @@ Router.delete('/servicio/tejidoIndustrial/:id',servicioTejidoIndustrialControlle
 
 //Ruta Inicio Sesion
 Router.post('/inicioSesionCliente', clienteAuthController.iniciarSesion);
-Router.post('/inicioSesionAdm', administradorAuthController.iniciarSesion);
 
 module.exports = Router;
