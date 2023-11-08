@@ -29,7 +29,7 @@ exports.registrarProducto = async (req, res) => {
   } catch (error) {
     console.error('Error al registrar el producto:', error);
     // Responde con un mensaje de error
-    res.status(500).json({ error: 'Error al registrar el producto' });
+    res.status(500).json({ error: 'Error al registrar el producto'});
   }
 };
 
