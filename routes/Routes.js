@@ -1,7 +1,9 @@
 const express = require('express');
 const productoController = require('../controllers/ProductoController');
 const clienteController = require('../controllers/ClienteController');
+const administradorController = require('../controllers/AdministradorController');
 const clienteAuthController = require('../controllers/Auth/ClienteAuthController');
+const administradorAuthController = require('../controllers/Auth/AdministradorAuthController');
 const servicioCorteVinilloController = require('../controllers/servicioController/CorteVinilloController');
 const servicioConfeccionController = require('../controllers/servicioController/ConfeccionController');
 const servicioCorteController = require('../controllers/servicioController/CorteController');
@@ -20,6 +22,8 @@ Router.put('/productos/:codigo', productoController.actualizarProducto);
 Router.delete('/productos/:codigo', productoController.eliminarProducto);
 Router.get('/productosfiltradoporprecio', productoController.filtrarPorPrecio);
 
+//Ruta Adm
+Router.post('/registraradm', administradorController.registrarAdministrador);
 
 //Rutas Cliente
 Router.post('/registrarcliente', clienteController.registrarCliente);
@@ -62,5 +66,6 @@ Router.delete('/servicio/tejidoIndustrial/:id',servicioTejidoIndustrialControlle
 
 //Ruta Inicio Sesion
 Router.post('/inicioSesionCliente', clienteAuthController.iniciarSesion);
+Router.post('/inicioSesionAdm', administradorAuthController.iniciarSesion);
 
 module.exports = Router;
