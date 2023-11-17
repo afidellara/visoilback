@@ -1,29 +1,11 @@
 const Producto = require('../models/Producto'); 
-const multer = require('multer');
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, '/public'); // Directorio donde se guardarán las imágenes
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname); // Usa el nombre original del archivo
-  }
-});
-
-const upload = multer({ storage: storage });
 
 exports.registrarProducto = (req, res) => {
-  upload.single('imagen')(req, res, async function (err) {
-    try {
-      if (err) {
-        // Maneja el error de carga de imagen aquí
-        return res.status(400).json({ mensaje: 'Error al cargar la imagen' });
-      }
+    try { 
 
       const { codigo, nombre, descripcion, precio, categoria, referencia, tela, talla, medida, disenio } = req.body;
-      const imagen = req.file ? req.file.filename : null; // Nombre del archivo de imagen subido, o null si no se proporciona
-
-      
+         
       // Crea un nuevo producto en la base de datos
       const producto = new Producto({
         codigo,
@@ -32,7 +14,6 @@ exports.registrarProducto = (req, res) => {
         precio,
         categoria,
         referencia,
-        imagen,
         tela,
         talla,
         medida,
@@ -40,7 +21,7 @@ exports.registrarProducto = (req, res) => {
       });
 
     // Guarda el nuevo producto en la base de datos
-    await nuevoProducto.save();
+    nuevoProducto.save();
     console.log("Producto guardado");
     // Responde con un mensaje de éxito
     res.status(201).json({ mensaje: 'Producto registrado con éxito' });
