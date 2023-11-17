@@ -39,16 +39,16 @@ exports.registrarProducto = (req, res) => {
         disenio
       });
 
-      console.log(producto); 
-
-      await producto.save();
-
-      res.json({ mensaje: 'Producto creado exitosamente' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ mensaje: 'Error al crear el producto' });
-    }
-  });
+    // Guarda el nuevo producto en la base de datos
+    await nuevoProducto.save();
+    console.log("Producto guardado");
+    // Responde con un mensaje de éxito
+    res.status(201).json({ mensaje: 'Producto registrado con éxito' });
+  } catch (error) {
+    console.error('Error al registrar el producto:', error);
+    // Responde con un mensaje de error
+    res.status(500).json({ error: 'Error al registrar el producto' });
+  }
 };
 
 

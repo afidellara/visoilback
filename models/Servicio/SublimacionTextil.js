@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 
 // Define el esquema para la entidad servicioSublimacionTextilSchema
 const servicioSublimacionTextilSchema = new mongoose.Schema({
-  id: { type: String, default: mongoose.Types.ObjectId },
   imagen: String,
   descripcion: String,
-  tipo: String
+  tipo: String,
+  cedula: String,
+  nombre: String
 });
 
 // Crea un modelo a partir del esquema
