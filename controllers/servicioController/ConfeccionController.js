@@ -14,7 +14,8 @@ exports.registrarServicioConfeccion = async (req, res) => {
       cantidad,
       tipo,
       cedula,
-      nombre
+      nombre,
+      precio
     } = req.body;
 
     // Crear un nuevo servicio de corte
@@ -26,7 +27,8 @@ exports.registrarServicioConfeccion = async (req, res) => {
       cantidad,
       tipo,
       cedula,
-      nombre
+      nombre,
+      precio
     });
 
     // Guardar el servicio en la base de datos

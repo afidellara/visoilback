@@ -6,7 +6,8 @@ const servicioSublimacionTextilSchema = new mongoose.Schema({
   descripcion: String,
   tipo: String,
   cedula: String,
-  nombre: String
+  nombre: String,
+  precio: Number
 });
 
 // Crea un modelo a partir del esquema

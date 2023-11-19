@@ -11,7 +11,8 @@ exports.registrarServicioTejidoIndustrial = async (req, res) => {
       texto,
       tipo,
       cedula,
-      nombre
+      nombre,
+      precio
     } = req.body;
 
     // Crear un nuevo elemento
@@ -21,7 +22,8 @@ exports.registrarServicioTejidoIndustrial = async (req, res) => {
       texto,
       tipo,
       cedula,
-      nombre
+      nombre,
+      precio
     });
 
     // Guardar el elemento en la base de datos

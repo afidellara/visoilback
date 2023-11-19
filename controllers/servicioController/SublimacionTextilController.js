@@ -10,7 +10,8 @@ exports.registrarServicioSublimacionTextil = async (req, res) => {
       descripcion,
       tipo,
       cedula,
-      nombre
+      nombre,
+      precio
     } = req.body;
 
     // Crear un nuevo producto
@@ -19,7 +20,8 @@ exports.registrarServicioSublimacionTextil = async (req, res) => {
       descripcion,
       tipo,
       cedula,
-      nombre
+      nombre,
+      precio
     });
 
     // Guardar el producto en la base de datos

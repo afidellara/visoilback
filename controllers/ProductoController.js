@@ -17,7 +17,8 @@ exports.registrarProducto = (req, res) => {
         tela,
         talla,
         medida,
-        disenio
+        disenio,
+        precio
       });
 
     // Guarda el nuevo producto en la base de datos

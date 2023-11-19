@@ -16,6 +16,7 @@ exports.registrarServicioCorteVinillo = async (req, res) => {
       tamanio,
       tipo,
       cedula,
+      precio
     } = req.body;
 
     // Crear un nuevo servicio de corte de vinilo
@@ -27,7 +28,8 @@ exports.registrarServicioCorteVinillo = async (req, res) => {
       texto,
       tamanio,
       tipo,
-      cedula
+      cedula,
+      precio
     });
 
     // Guardar el servicio en la base de datos
