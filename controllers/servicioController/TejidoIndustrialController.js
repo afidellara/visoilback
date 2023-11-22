@@ -22,7 +22,8 @@ exports.registrarServicioTejidoIndustrial = async (req, res) => {
       texto,
       tipo,
       cedula,
-      nombre
+      nombre,
+      precio
     } = req.body;
 
     const imagen = req.file ? req.file.filename : null;
@@ -34,7 +35,8 @@ exports.registrarServicioTejidoIndustrial = async (req, res) => {
       texto,
       tipo,
       cedula,
-      nombre
+      nombre,
+      precio
     });
 
     // Guardar el elemento en la base de datos

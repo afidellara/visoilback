@@ -13,7 +13,8 @@ exports.registrarServicioCorte = async (req, res) => {
       imagen,
       tipo,
       cedula,
-      nombre
+      nombre,
+      precio
     } = req.body;
 
     // Crear una nueva pieza de corte
@@ -25,7 +26,8 @@ exports.registrarServicioCorte = async (req, res) => {
       imagen,
       tipo,
       cedula,
-      nombre
+      nombre,
+      precio
     });
 
     // Guardar la pieza de corte en la base de datos

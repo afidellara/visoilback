@@ -10,7 +10,8 @@ const servicioCorteVinilloSchema = new mongoose.Schema({
   tamanio: String,
   tipo: String,
   cedula: String,
-  nombre: String
+  nombre: String,
+  precio: Number
 });
 
 // Crea un modelo a partir del esquema

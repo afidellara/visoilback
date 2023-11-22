@@ -9,7 +9,8 @@ const servicioConfeccionSchema = new mongoose.Schema({
   cantidad: Number,
   tipo: String,
   cedula: String,
-  nombre: String
+  nombre: String,
+  precio: Number
 });
 
 // Crea un modelo a partir del esquema

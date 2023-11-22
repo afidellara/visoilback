@@ -29,7 +29,8 @@ exports.registrarServicioEstampado = upload.single('imagen'), async (req, res) =
       descripcion,
       tipo,
       cedula,
-      nombre
+      nombre,
+      precio
     } = req.body;
 
     // La URL de la imagen en S3 estará disponible en req.file.location
@@ -41,7 +42,8 @@ exports.registrarServicioEstampado = upload.single('imagen'), async (req, res) =
       descripcion,
       tipo,
       cedula,
-      nombre
+      nombre,
+      precio
     });
 
     // Guardar el producto en la base de datos
