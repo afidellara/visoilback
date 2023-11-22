@@ -1,10 +1,35 @@
-const Producto = require('../models/Producto'); // Asegúrate de que la ruta sea correcta
+const Producto = require('../models/Producto');
+const AWS = require('aws-sdk');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
 
-// Controlador para registrar un nuevo productoddd
-exports.registrarProducto = async (req, res) => {
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+});
+
+const s3 = new AWS.S3();
+
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: process.env.S3_BUCKET_NAME,
+    acl: 'public-read',
+    key: function (req, file, cb) {
+      cb(null, Date.now().toString() + '-' + file.originalname);
+    },
+  }),
+});
+
+// Controlador para registrar un nuevo producto
+exports.registrarProducto = upload.single('imagen'), async (req, res) => {
   try {
-    // Obtén los datos del producto desde el cuerpo de la solicitud (req.body)
-    const { codigo, nombre, descripcion, precio, categoria, referencia, imagen, tela, talla, medida, disenio } = req.body;
+    // Obtén los datos del formulario desde el cuerpo de la solicitud (req.body)
+    const { codigo, nombre, descripcion, precio, categoria, referencia, tela, talla, medida, disenio } = req.body;
+
+    // La información de la imagen está disponible en req.file debido al middleware Multer
+    const imagen = req.file;
 
     // Crea una instancia del modelo Producto con los datos recibidos
     const nuevoProducto = new Producto({
@@ -14,7 +39,7 @@ exports.registrarProducto = async (req, res) => {
       precio,
       categoria,
       referencia,
-      imagen,
+      imagen: imagen.key, // Guarda la clave de la imagen en lugar de la imagen completa
       tela,
       talla,
       medida,
@@ -30,8 +55,10 @@ exports.registrarProducto = async (req, res) => {
     console.error('Error al registrar el producto:', error);
     // Responde con un mensaje de error
     res.status(500).json({ error: 'Error al registrar el producto'});
-  }
+  }
 };
+
+
 
 // Controlador para consultar todos los productos
 exports.consultarProductosAdmin = async (req, res) => {

@@ -1,21 +1,43 @@
 const Estampado = require('../../models/Servicio/Estampado');
-
+const AWS = require('aws-sdk');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
 // Otros imports y configuraciones necesarios
 
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+});
+
+const s3 = new AWS.S3();
+
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: process.env.S3_BUCKET_NAME,
+    acl: 'public-read',
+    key: function (req, file, cb) {
+      cb(null, Date.now().toString() + '-' + file.originalname);
+    },
+  }),
+});
 // Define el método para registrar un producto
-exports.registrarServicioEstampado = async (req, res) => {
+exports.registrarServicioEstampado = upload.single('imagen'), async (req, res) => {
   try {
     const {
-      imagen,
       descripcion,
       tipo,
       cedula,
       nombre
     } = req.body;
 
-    // Crear un nuevo producto
+    // La URL de la imagen en S3 estará disponible en req.file.location
+    const imagenURL = req.file.location;
+
+    // Crear un nuevo producto con la URL de la imagen en S3
     const nuevoEstampado = new Estampado({
-      imagen,
+      imagen: imagenURL,
       descripcion,
       tipo,
       cedula,
