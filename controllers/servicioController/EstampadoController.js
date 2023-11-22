@@ -7,10 +7,7 @@ const multerS3 = require('multer-s3');
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION,
 });
-
-const s3 = new AWS.S3();
 
 const upload = multer({
   storage: multerS3({
@@ -22,6 +19,7 @@ const upload = multer({
     },
   }),
 });
+
 // Define el método para registrar un producto
 exports.registrarServicioEstampado = upload.single('imagen'), async (req, res) => {
   try {
@@ -46,17 +44,15 @@ exports.registrarServicioEstampado = upload.single('imagen'), async (req, res) =
       precio
     });
 
+
     // Guardar el producto en la base de datos
     const estampadoGuardado = await nuevoEstampado.save();
-
     res.json(estampadoGuardado);
   } catch (error) {
     console.error('Error al registrar el producto:', error);
     res.status(500).send('Error interno del servidor');
   }
 };
-
-
 
 
 // Otros imports y configuraciones necesarios
