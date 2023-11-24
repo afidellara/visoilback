@@ -42,9 +42,14 @@ exports.registrarCliente = async (req, res) => {
             pass: hashContraseña
         });
 
+        if(req.file){
+            const {filename}=req.file
+            nuevoCliente.setImgUrl(filename)
+          }
         // Guarda el nuevo cliente en la base de datos
         await nuevoCliente.save();
 
+        console.log("Cliente guardado");
         res.status(201).json({ mensaje: 'Cliente registrado con éxito' });
     } catch (error) {
         console.error('Error al registrar el cliente:', error);
