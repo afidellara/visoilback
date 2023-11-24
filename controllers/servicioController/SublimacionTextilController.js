@@ -11,7 +11,9 @@ exports.registrarServicioSublimacionTextil = async (req, res) => {
       tipo,
       cedula,
       nombre,
-      precio
+      precio,
+      estado,
+      telefono
     } = req.body;
 
     // Crear un nuevo producto
@@ -21,8 +23,15 @@ exports.registrarServicioSublimacionTextil = async (req, res) => {
       tipo,
       cedula,
       nombre,
-      precio
+      precio,
+      telefono,
+      estado:'PENDIENTE'
     });
+
+    if(req.file){
+      const {filename}=req.file
+      nuevoSublimacionTextil.setImgUrl(filename)
+    }
 
     // Guardar el producto en la base de datos
     const sublimacionTextilGuardado = await nuevoSublimacionTextil.save();

@@ -25,8 +25,14 @@ const productoSchema = new mongoose.Schema({
   talla: String,
   medida: String,
   disenio: String,
-  precio: Number
+  precio: Number,
+  estado: String,
+  telefono: String
 });
+
+productoSchema.methods.setImgUrl = function setImgUrl(filename){
+  this.imagen = `http://localhost:4000/public/${filename}` 
+}
 
 // Crea el modelo de Producto
 const Producto = mongoose.model('Producto', productoSchema);

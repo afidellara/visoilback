@@ -10,6 +10,8 @@ app.use(cors())
 
 app.use(express.json()); 
 
+app.use('/public', express.static(`${__dirname}/storage/imgs`))
+
 app.use('/visoil', require('./routes/Routes')); 
 
 

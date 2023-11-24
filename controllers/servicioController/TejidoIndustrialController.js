@@ -1,18 +1,7 @@
 const TejidoIndustrial = require('../../models/Servicio/TejidoIndustrial');
-const multer = require('multer');
 const path = require('path');
 // Otros imports y configuraciones necesarios
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Ruta donde se almacenarán las imágenes
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-
-const upload = multer({ storage: storage });
 
 // Define el método para registrar un elemento
 exports.registrarServicioTejidoIndustrial = async (req, res) => {
@@ -23,7 +12,9 @@ exports.registrarServicioTejidoIndustrial = async (req, res) => {
       tipo,
       cedula,
       nombre,
-      precio
+      precio,
+      estado,
+      telefono
     } = req.body;
 
     const imagen = req.file ? req.file.filename : null;
@@ -36,8 +27,15 @@ exports.registrarServicioTejidoIndustrial = async (req, res) => {
       tipo,
       cedula,
       nombre,
-      precio
+      precio,
+      telefono,
+      estado:'PENDIENTE'
     });
+
+    if(req.file){
+      const {filename}=req.file
+      nuevoTejidoIndustrial.setImgUrl(filename)
+    }
 
     // Guardar el elemento en la base de datos
     const tejidoIndustrialGuardado = await nuevoTejidoIndustrial.save();

@@ -21,6 +21,11 @@ exports.registrarProducto = async (req, res) => {
       disenio
     });
 
+    if(req.file){
+      const {filename}=req.file
+      nuevoProducto.setImgUrl(filename)
+    }
+
     // Guarda el nuevo producto en la base de datos
     nuevoProducto.save();
     console.log("Producto guardado");

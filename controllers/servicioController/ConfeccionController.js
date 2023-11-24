@@ -9,27 +9,34 @@ exports.registrarServicioConfeccion = async (req, res) => {
     const {
       imagen,
       descripcion,
-      abjuntas,
       tipoTela,
       cantidad,
       tipo,
       cedula,
       nombre,
-      precio
+      precio,
+      estado,
+      telefono
     } = req.body;
 
     // Crear un nuevo servicio de corte
     const nuevoServicioConfeccion = new ServicioConfeccion({
       imagen,
       descripcion,
-      abjuntas,
       tipoTela,
       cantidad,
       tipo,
       cedula,
       nombre,
-      precio
+      precio,
+      telefono,
+      estado:'PENDIENTE'
     });
+
+    if(req.file){
+      const {filename}=req.file
+      nuevoServicioConfeccion.setImgUrl(filename)
+    }
 
     // Guardar el servicio en la base de datos
     const servicioGuardado = await nuevoServicioConfeccion.save();

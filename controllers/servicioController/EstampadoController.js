@@ -1,62 +1,43 @@
 const Estampado = require('../../models/Servicio/Estampado');
-const AWS = require('aws-sdk');
-const multer = require('multer');
-const multerS3 = require('multer-s3');
-// Otros imports y configuraciones necesarios
-
-AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-});
-
-const upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: process.env.S3_BUCKET_NAME,
-    acl: 'public-read',
-    key: function (req, file, cb) {
-      cb(null, Date.now().toString() + '-' + file.originalname);
-    },
-  }),
-});
 
 // Define el método para registrar un producto
-exports.registrarServicioEstampado = upload.single('imagen'), async (req, res) => {
+exports.registrarServicioEstampado = (req, res) => {
   try {
     const {
       descripcion,
       tipo,
       cedula,
       nombre,
-      precio
+      precio,
+      estado,
+      telefono
     } = req.body;
 
     // La URL de la imagen en S3 estará disponible en req.file.location
-    const imagenURL = req.file.location;
-
-    // Crear un nuevo producto con la URL de la imagen en S3
+        // Crea un nuevo producto con la URL de la imagen en S3
     const nuevoEstampado = new Estampado({
-      imagen: imagenURL,
       descripcion,
       tipo,
       cedula,
       nombre,
-      precio
+      precio,
+      telefono,
+      estado:'PENDIENTE'
     });
 
+    if(req.file){
+      const {filename}=req.file
+      nuevoEstampado.setImgUrl(filename)
+    }
 
-    // Guardar el producto en la base de datos
-    const estampadoGuardado = await nuevoEstampado.save();
+    // Guarda el producto en la base de datos
+    const estampadoGuardado =  nuevoEstampado.save();
     res.json(estampadoGuardado);
   } catch (error) {
     console.error('Error al registrar el producto:', error);
     res.status(500).send('Error interno del servidor');
   }
 };
-
-
-// Otros imports y configuraciones necesarios
-
 // Define el método para consultar todos los productos
 exports.consultarServicioEstampado = async (req, res) => {
   try {
@@ -76,17 +57,18 @@ exports.consultarServicioEstampado = async (req, res) => {
 // Método para eliminar un servicio de estampado por su _id
 exports.eliminarServicioEstampado = async (req, res) => {
   try {
-    const servicioId = req.params.id; // El _id del servicio a eliminar se pasa como parámetro en la URL
+    const id = req.params.id; // El _id del servicio a eliminar se pasa como parámetro en la URL
 
+    console.log(id); 
     // Verificar si el servicio de estampado existe antes de intentar eliminarlo
-    const servicioExistente = await Estampado.findById(servicioId);
+    const servicioExistente = await Estampado.findById(id);
     
     if (!servicioExistente) {
       return res.status(404).json({ message: 'El servicio de estampado no existe.' });
     }
 
     // Eliminar el servicio de estampado por su _id
-    await Estampado.findByIdAndDelete(servicioId);
+    await Estampado.findByIdAndDelete(id);
 
     res.json({ message: 'Servicio de estampado eliminado con éxito.' });
   } catch (error) {
@@ -102,7 +84,7 @@ exports.eliminarServicioEstampado = async (req, res) => {
 exports.actualizarServicioEstampado = async (req, res) => {
   try {
     const servicioId = req.params.id; // El _id del servicio a actualizar se pasa como parámetro en la URL
-    const nuevosDatos = req.body; // Los nuevos datos a actualizar se envían en el cuerpo de la solicitud
+    const {estado} = req.body; // Los nuevos datos a actualizar se envían en el cuerpo de la solicitud
 
     // Verificar si el servicio de estampado existe antes de intentar actualizarlo
     const servicioExistente = await Estampado.findById(servicioId);
@@ -112,7 +94,7 @@ exports.actualizarServicioEstampado = async (req, res) => {
     }
 
     // Actualizar el servicio de estampado por su _id
-    await Estampado.findByIdAndUpdate(servicioId, nuevosDatos);
+    await Estampado.findByIdAndUpdate(servicioId, estado);
 
     res.json({ message: 'Servicio de estampado actualizado con éxito.' });
   } catch (error) {

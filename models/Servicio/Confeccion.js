@@ -4,14 +4,20 @@ const mongoose = require('mongoose');
 const servicioConfeccionSchema = new mongoose.Schema({
   imagen: String,
   descripcion: String,
-  abjuntas: String,
+  //abjuntas: String,
   tipoTela: String,
   cantidad: Number,
   tipo: String,
   cedula: String,
   nombre: String,
-  precio: Number
+  precio: Number,
+  estado: String,
+  telefono: String
 });
+
+servicioConfeccionSchema.methods.setImgUrl = function setImgUrl(filename){
+  this.imagen = `http://localhost:4000/public/${filename}` 
+}
 
 // Crea un modelo a partir del esquema
 const ServicioConfeccion = mongoose.model('ServicioConfeccion', servicioConfeccionSchema);

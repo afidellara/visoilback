@@ -6,29 +6,38 @@ const Corte = require('../../models/Servicio/Corte');
 exports.registrarServicioCorte = async (req, res) => {
   try {
     const {
+      imagen,
       piezaCorte,
-      tela,
+      tipoTela,
       cantidad,
       descripcion,
-      imagen,
       tipo,
       cedula,
       nombre,
-      precio
+      precio,
+      estado,
+      telefono
     } = req.body;
 
     // Crear una nueva pieza de corte
     const nuevaCorte = new Corte({
+      imagen,
       piezaCorte,
-      tela,
+      tipoTela,
       cantidad,
       descripcion,
-      imagen,
       tipo,
       cedula,
       nombre,
-      precio
+      precio,
+      telefono,
+      estado:'PENDIENTE'
     });
+
+    if(req.file){
+      const {filename}=req.file
+      nuevaCorte.setImgUrl(filename)
+    }
 
     // Guardar la pieza de corte en la base de datos
     const CorteGuardada = await nuevaCorte.save();

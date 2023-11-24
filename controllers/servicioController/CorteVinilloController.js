@@ -1,5 +1,4 @@
 const express = require('express');
-const router = express.Router();
 const ServicioCorteVinillo = require('../../models/Servicio/CorteVinillo');
 
 // Otras importaciones y configuraciones necesarias
@@ -16,7 +15,9 @@ exports.registrarServicioCorteVinillo = async (req, res) => {
       tamanio,
       tipo,
       cedula,
-      precio
+      precio,
+      estado,
+      telefono
     } = req.body;
 
     // Crear un nuevo servicio de corte de vinilo
@@ -29,8 +30,15 @@ exports.registrarServicioCorteVinillo = async (req, res) => {
       tamanio,
       tipo,
       cedula,
-      precio
+      precio,
+      telefono,
+      estado:'PENDIENTE'
     });
+
+    if(req.file){
+      const {filename}=req.file
+      nuevoServicioCorteVinillo.setImgUrl(filename)
+    }
 
     // Guardar el servicio en la base de datos
     const servicioGuardado = await nuevoServicioCorteVinillo.save();

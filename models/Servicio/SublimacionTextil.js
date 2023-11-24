@@ -7,9 +7,15 @@ const servicioSublimacionTextilSchema = new mongoose.Schema({
   tipo: String,
   cedula: String,
   nombre: String,
-  precio: Number
+  precio: Number,
+  estado: String,
+  telefono: String
 });
 
+
+servicioSublimacionTextilSchema.methods.setImgUrl = function setImgUrl(filename){
+  this.imagen = `http://localhost:4000/public/${filename}` 
+}
 // Crea un modelo a partir del esquema
 const ServicioSublimacionTextil = mongoose.model('ServicioSublimacionTextil', servicioSublimacionTextilSchema);
 
