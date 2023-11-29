@@ -51,6 +51,9 @@ const clienteSchema = new mongoose.Schema({
     }
 });
 
+clienteSchema.methods.setImgUrl = function setImgUrl(filename){
+    this.imagen = `http://localhost:4000/public/${filename}` 
+  }
 
 // Crea el modelo de Cliente
 const Cliente = mongoose.model('Cliente', clienteSchema);

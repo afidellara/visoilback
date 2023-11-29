@@ -29,7 +29,7 @@ Router.get('/productosfiltradoporprecio', productoController.filtrarPorPrecio);
 Router.post('/registraradm', administradorController.registrarAdministrador);
 
 //Rutas Cliente
-Router.post('/registrarcliente', clienteController.registrarCliente);
+Router.post('/registrarcliente', upload.single('imagen'),clienteController.registrarCliente);
 Router.get('/clientes', clienteController.consultarClientes);
 Router.put('/clientes/:cedula', clienteController.actualizarCliente);
 Router.delete('/clientes/:cedula',clienteController.eliminarCliente);
