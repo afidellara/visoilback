@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 // Define el esquema para la entidad servicioConfeccionSchema
 const servicioConfeccionSchema = new mongoose.Schema({
+  id: String,
   imagen: String,
   descripcion: String,
   //abjuntas: String,

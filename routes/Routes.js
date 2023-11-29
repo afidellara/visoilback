@@ -23,6 +23,8 @@ Router.put('/productos/:codigo', productoController.actualizarProducto);
 Router.delete('/productos/:codigo', productoController.eliminarProducto);
 Router.get('/productosfiltradoporprecio', productoController.filtrarPorPrecio);
 
+
+
 //Ruta Adm
 Router.post('/registraradm', administradorController.registrarAdministrador);
 
@@ -33,16 +35,19 @@ Router.put('/clientes/:cedula', clienteController.actualizarCliente);
 Router.delete('/clientes/:cedula',clienteController.eliminarCliente);
 
 //Rutas Servicio
-//Rutas ServicioCorteVinillo
-Router.post('/servicio/cortevinillo',upload.single('imagen'),servicioCorteVinilloController.registrarServicioCorteVinillo);
-Router.get('/servicio/cortevinillo',servicioCorteVinilloController.consultarServiciosCorteVinillo);
-Router.put('/servicio/cortevinillo/:id',servicioCorteVinilloController.actualizarServicioCorteVinillo);
-Router.delete('/servicio/cortevinillo/:id',servicioCorteVinilloController.eliminarServicioCorteVinillo);
 //Rutas confeccion
 Router.post('/servicio/confeccion',upload.single('imagen'),servicioConfeccionController.registrarServicioConfeccion);
 Router.get('/servicio/confeccion',servicioConfeccionController.consultarServiciosConfeccion);
 Router.put('/servicio/confeccion/:id',servicioConfeccionController.actualizarServicioConfeccion);
 Router.delete('/servicio/confeccion/:id',servicioConfeccionController.eliminarServicioConfeccion);
+Router.put('/servicio/confeccionestado/:id',servicioConfeccionController.actualizarEstadoServicioConfeccion);
+
+ 
+//Rutas ServicioCorteVinillo
+Router.post('/servicio/cortevinillo',upload.single('imagen'),servicioCorteVinilloController.registrarServicioCorteVinillo);
+Router.get('/servicio/cortevinillo',servicioCorteVinilloController.consultarServiciosCorteVinillo);
+Router.put('/servicio/cortevinillo/:id',servicioCorteVinilloController.actualizarServicioCorteVinillo);
+Router.delete('/servicio/cortevinillo/:id',servicioCorteVinilloController.eliminarServicioCorteVinillo);
 //Rutas corte
 Router.post('/servicio/corte',upload.single('imagen'),servicioCorteController.registrarServicioCorte);
 Router.get('/servicio/corte',servicioCorteController.consultarServicioCorte);

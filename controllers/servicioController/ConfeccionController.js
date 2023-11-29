@@ -1,7 +1,6 @@
 
 const ServicioConfeccion = require('../../models/Servicio/Confeccion');
-
-// Otros imports y configuraciones necesarios
+const mongoose = require('mongoose');
 
 // Define el método para registrar un servicio de corte
 exports.registrarServicioConfeccion = async (req, res) => {
@@ -48,10 +47,6 @@ exports.registrarServicioConfeccion = async (req, res) => {
   }
 };
 
-
-
-// Otros imports y configuraciones necesarios
-
 // Método para consultar todos los servicios de corte
 exports.consultarServiciosConfeccion = async (req, res) => {
   try {
@@ -64,10 +59,6 @@ exports.consultarServiciosConfeccion = async (req, res) => {
     res.status(500).send('Error interno del servidor');
   }
 };
-
-
-
-// Otros imports y configuraciones necesarios
 
 // Método para eliminar un servicio de confección por su _id
 exports.eliminarServicioConfeccion = async (req, res) => {
@@ -91,11 +82,6 @@ exports.eliminarServicioConfeccion = async (req, res) => {
   }
 };
 
-
-
-
-// Otros imports y configuraciones necesarios
-
 // Método para actualizar un servicio de confección por su _id
 exports.actualizarServicioConfeccion = async (req, res) => {
   try {
@@ -118,3 +104,33 @@ exports.actualizarServicioConfeccion = async (req, res) => {
     res.status(500).send('Error interno del servidor');
   }
 };
+
+// Método para actualizar un servicio de confección por su _id
+exports.actualizarEstadoServicioConfeccion = async (req, res) => {
+  try {
+    const IdServicio = req.params.id;
+    const { estado } = req.body;
+
+    // Verificar si el servicio existe antes de intentar actualizarlo
+    const servicioExistente = await ServicioConfeccion.findById({ _id: IdServicio });
+
+    console.log('Servicio existente:', servicioExistente);
+    if (!servicioExistente) {
+      return res.status(404).json({ message: 'El servicio de confección no existe.' });
+    }
+
+    // Actualizar solo el campo 'nombre' del servicio de confección por su nombre
+    await ServicioConfeccion.findOneAndUpdate({ _id: IdServicio }, { estado });
+
+    res.json({ message: 'Nombre del servicio de confección actualizado con éxito.' });
+  } catch (error) {
+    console.error('Error al actualizar el nombre del servicio de confección:', error);
+    res.status(500).send('Error interno del servidor');
+  }
+};
+
+
+
+
+
+
