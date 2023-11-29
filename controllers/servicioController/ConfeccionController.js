@@ -122,9 +122,9 @@ exports.actualizarEstadoServicioConfeccion = async (req, res) => {
     // Actualizar solo el campo 'nombre' del servicio de confección por su nombre
     await ServicioConfeccion.findOneAndUpdate({ _id: IdServicio }, { estado });
 
-    res.json({ message: 'Nombre del servicio de confección actualizado con éxito.' });
+    res.json({ message: 'Estado del servicio de confección actualizado con éxito.' });
   } catch (error) {
-    console.error('Error al actualizar el nombre del servicio de confección:', error);
+    console.error('Error al actualizar el Estado del servicio de confección:', error);
     res.status(500).send('Error interno del servidor');
   }
 };

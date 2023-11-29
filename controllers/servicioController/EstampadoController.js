@@ -102,3 +102,27 @@ exports.actualizarServicioEstampado = async (req, res) => {
     res.status(500).send('Error interno del servidor');
   }
 };
+
+
+exports.actualizarEstadoServicioEstampado = async (req, res) => {
+  try {
+    const IdServicio = req.params.id;
+    const { estado } = req.body;
+
+    // Verificar si el servicio existe antes de intentar actualizarlo
+    const servicioExistente = await Estampado.findById({ _id: IdServicio });
+
+    console.log('Servicio existente:', servicioExistente);
+    if (!servicioExistente) {
+      return res.status(404).json({ message: 'El servicio de Estampado no existe.' });
+    }
+
+    // Actualizar solo el campo 'nombre' del servicio de confección por su nombre
+    await Estampado.findOneAndUpdate({ _id: IdServicio }, { estado });
+
+    res.json({ message: 'Estado del Servicio Estampado actualizado con éxito.' });
+  } catch (error) {
+    console.error('Error al actualizar el estado del servicio de Estampado:', error);
+    res.status(500).send('Error interno del servidor');
+  }
+};

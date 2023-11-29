@@ -112,3 +112,26 @@ exports.actualizarSublimacionTextil = async (req, res) => {
     res.status(500).send('Error interno del servidor');
   }
 };
+
+exports.actualizarEstadoServicioSublimacionTextil = async (req, res) => {
+  try {
+    const IdServicio = req.params.id;
+    const { estado } = req.body;
+
+    // Verificar si el servicio existe antes de intentar actualizarlo
+    const servicioExistente = await SublimacionTextil.findById({ _id: IdServicio });
+
+    console.log('Servicio existente:', servicioExistente);
+    if (!servicioExistente) {
+      return res.status(404).json({ message: 'El servicio de Sublimacion Textil no existe.' });
+    }
+
+    // Actualizar solo el campo 'nombre' del servicio de confección por su nombre
+    await SublimacionTextil.findOneAndUpdate({ _id: IdServicio }, { estado });
+
+    res.json({ message: 'Estado del Servicio Sublimacion Textil actualizado con éxito.' });
+  } catch (error) {
+    console.error('Error al actualizar el estado del servicio de Sublimacion Textil:', error);
+    res.status(500).send('Error interno del servidor');
+  }
+};
