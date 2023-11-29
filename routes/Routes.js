@@ -38,36 +38,44 @@ Router.delete('/clientes/:cedula',clienteController.eliminarCliente);
 //Rutas confeccion
 Router.post('/servicio/confeccion',upload.single('imagen'),servicioConfeccionController.registrarServicioConfeccion);
 Router.get('/servicio/confeccion',servicioConfeccionController.consultarServiciosConfeccion);
-Router.put('/servicio/confeccion/:id',servicioConfeccionController.actualizarServicioConfeccion);
 Router.delete('/servicio/confeccion/:id',servicioConfeccionController.eliminarServicioConfeccion);
 Router.put('/servicio/confeccionestado/:id',servicioConfeccionController.actualizarEstadoServicioConfeccion);
+Router.put('/servicio/confeccion/:id',servicioConfeccionController.actualizarServicioConfeccion);//falta en el front
 
  
 //Rutas ServicioCorteVinillo
 Router.post('/servicio/cortevinillo',upload.single('imagen'),servicioCorteVinilloController.registrarServicioCorteVinillo);
 Router.get('/servicio/cortevinillo',servicioCorteVinilloController.consultarServiciosCorteVinillo);
-Router.put('/servicio/cortevinillo/:id',servicioCorteVinilloController.actualizarServicioCorteVinillo);
 Router.delete('/servicio/cortevinillo/:id',servicioCorteVinilloController.eliminarServicioCorteVinillo);
+Router.put('/servicio/cortevinillo/:id',servicioCorteVinilloController.actualizarServicioCorteVinillo);//falta en el front
+
+
 //Rutas corte
 Router.post('/servicio/corte',upload.single('imagen'),servicioCorteController.registrarServicioCorte);
 Router.get('/servicio/corte',servicioCorteController.consultarServicioCorte);
-Router.put('/servicio/corte/:id',servicioCorteController.actualizarServicioCorte);
 Router.delete('/servicio/corte/:id',servicioCorteController.eliminarServicioCorte);
+Router.put('/servicio/corte/:id',servicioCorteController.actualizarServicioCorte);//falta en el front
+
+
 //Rutas estampado
 Router.post('/servicio/estampado', upload.single('imagen'),servicioEstampadoController.registrarServicioEstampado); 
 Router.get('/servicio/estampado',servicioEstampadoController.consultarServicioEstampado);
-Router.put('/servicio/estampado/:id',servicioEstampadoController.actualizarServicioEstampado);
 Router.delete('/servicio/estampado/:id',servicioEstampadoController.eliminarServicioEstampado);
+Router.put('/servicio/estampado/:id',servicioEstampadoController.actualizarServicioEstampado);//falta en el front
+
+
 //Rutas sublimacionTextil
 Router.post('/servicio/sublimacionTextil',upload.single('imagen'),servicioSublimacionTextilController.registrarServicioSublimacionTextil);
 Router.get('/servicio/sublimacionTextil',servicioSublimacionTextilController.consultarSublimacionTextil);
-Router.put('/servicio/sublimacionTextil/:id',servicioSublimacionTextilController.actualizarSublimacionTextil);
 Router.delete('/servicio/sublimacionTextil/:id',servicioSublimacionTextilController.eliminarSublimacionTextil);
+Router.put('/servicio/sublimacionTextil/:id',servicioSublimacionTextilController.actualizarSublimacionTextil);//falta en el front
+
+
 //Rutas tejidoIndustrial
 Router.post('/servicio/tejidoIndustrial',upload.single('imagen'),servicioTejidoIndustrialController.registrarServicioTejidoIndustrial);
 Router.get('/servicio/tejidoIndustrial',servicioTejidoIndustrialController.consultarTejidoIndustrial);
-Router.put('/servicio/tejidoIndustrial/:id',servicioTejidoIndustrialController.actualizarTejidoIndustrial);
 Router.delete('/servicio/tejidoIndustrial/:id',servicioTejidoIndustrialController.eliminarTejidoIndustrial);
+Router.put('/servicio/tejidoIndustrial/:id',servicioTejidoIndustrialController.actualizarTejidoIndustrial);//falta en el front
 
 
 //Ruta Inicio Sesion
