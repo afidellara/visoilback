@@ -50,7 +50,7 @@ const clienteSchema = new mongoose.Schema({
         required: true,
     }
 });
-
+ 
 clienteSchema.methods.setImgUrl = function setImgUrl(filename){
     this.imagen = `http://localhost:4000/public/${filename}` 
   }

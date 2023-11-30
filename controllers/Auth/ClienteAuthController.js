@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 // Asegúrate de importar correctamente tu modelo de Usuario
 exports.iniciarSesion = async function (req, res) {
-  const { correo, password } = req.body;
+  const { correo, pass } = req.body;
 
   try {
     // Buscar el cliente por el correo proporcionado
@@ -28,3 +28,4 @@ exports.iniciarSesion = async function (req, res) {
     return res.status(500).json({ success: false, message: 'Error en el servidor' });
   }
 };
+ 
